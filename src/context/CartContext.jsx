@@ -52,6 +52,10 @@ function cartReducer(state, action) {
     };
   }
 
+  if (action.type === 'CLEAR_CART') {
+    return { ...state, items: [] };
+  }
+
   return state;
 }
 
@@ -68,10 +72,15 @@ function CartContextProvider({ children }) {
     dispatch({ type: 'REMOVE_ITEM', id });
   }
 
+  function clearCart() {
+    dispatch({ type: 'CLEAR_CART' });
+  }
+
   const cartContext = {
     items: cart.items,
     addItem,
     removeItem,
+    clearCart,
   };
 
   return (
